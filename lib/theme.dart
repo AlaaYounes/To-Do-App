@@ -9,6 +9,7 @@ class MyTheme {
   static Color redColor = Color(0xffEC4B4B);
   static Color greenColor = Color(0xff61E757);
   static Color darkBackground = Color(0xff060E1E);
+  static Color navyBlue = Color(0xff1c252f);
   static Color offWhiteColor = Color(0xCDCACAE8);
 
   static ThemeData lightTheme = ThemeData(
@@ -33,6 +34,11 @@ class MyTheme {
           fontSize: 18,
           fontFamily: 'Poppins',
           color: blackColor),
+      bodyLarge: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          fontFamily: 'Poppins',
+          color: blackColor.withOpacity(.50)),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.transparent,
@@ -62,7 +68,7 @@ class MyTheme {
         fontWeight: FontWeight.bold,
         fontSize: 22,
         fontFamily: 'Poppins',
-        color: blackColor,
+        color: whiteColor,
       ),
       titleMedium: TextStyle(
           fontWeight: FontWeight.bold,
@@ -74,9 +80,14 @@ class MyTheme {
           fontSize: 18,
           fontFamily: 'Poppins',
           color: whiteColor),
+      bodyLarge: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          fontFamily: 'Poppins',
+          color: whiteColor.withOpacity(.25)),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.transparent,
+      backgroundColor: navyBlue,
       elevation: 0,
       selectedItemColor: blueColor,
       unselectedItemColor: greyColor,

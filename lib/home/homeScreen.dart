@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:to_do/home/settings/settings.dart';
 import 'package:to_do/home/tasks/taskBottomSheet.dart';
 import 'package:to_do/home/tasks/tasksTab.dart';
@@ -17,16 +18,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('To Do List'),
+        title: Text(AppLocalizations.of(context)!.app_title),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 8,
         child: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tasks'),
+            BottomNavigationBarItem(icon: Icon(Icons.list),
+                label: AppLocalizations.of(context)!.tasks),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings_outlined), label: 'Settings'),
+                icon: Icon(Icons.settings_outlined),
+                label: AppLocalizations.of(context)!.settings),
           ],
           currentIndex: selectedIndex,
           onTap: (index) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/theme.dart';
 
@@ -17,7 +18,7 @@ class _TaskDetailsState extends State<TaskDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Edit Task',
+          AppLocalizations.of(context)!.edit_task,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         elevation: 0,
@@ -32,9 +33,11 @@ class _TaskDetailsState extends State<TaskDetails> {
                 height: 30,
               ),
               Text(
-                'Title',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: MyTheme.blackColor.withOpacity(.5), fontSize: 18),
+                AppLocalizations.of(context)!.task_title,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyLarge,
               ),
               SizedBox(
                 height: 10,
@@ -44,21 +47,20 @@ class _TaskDetailsState extends State<TaskDetails> {
                   hintText: 'This is title',
                   hintStyle: Theme.of(context)
                       .textTheme
-                      .titleLarge!
-                      .copyWith(color: MyTheme.blackColor, fontSize: 20),
+                      .titleSmall!
+                      .copyWith(fontSize: 20),
                 ),
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge!
+                    .titleSmall!
                     .copyWith(color: MyTheme.blackColor, fontSize: 20),
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
-                'Description',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: MyTheme.blackColor.withOpacity(.5), fontSize: 20),
+                AppLocalizations.of(context)!.task_description,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               SizedBox(
                 height: 10,
@@ -68,22 +70,21 @@ class _TaskDetailsState extends State<TaskDetails> {
                   hintText: 'Task details',
                   hintStyle: Theme.of(context)
                       .textTheme
-                      .titleLarge!
-                      .copyWith(color: MyTheme.blackColor, fontSize: 20),
+                      .titleSmall!
+                      .copyWith(fontSize: 20),
                 ),
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge!
-                    .copyWith(color: MyTheme.blackColor, fontSize: 20),
+                    .titleSmall!
+                    .copyWith(fontSize: 20),
                 maxLines: null,
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
-                'Task Date',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: MyTheme.blackColor.withOpacity(.5), fontSize: 20),
+                AppLocalizations.of(context)!.task_date,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               SizedBox(
                 height: 10,
@@ -94,13 +95,13 @@ class _TaskDetailsState extends State<TaskDetails> {
                   hintText: '$selectedDate',
                   hintStyle: Theme.of(context)
                       .textTheme
-                      .titleLarge!
-                      .copyWith(color: MyTheme.blackColor, fontSize: 20),
+                      .titleSmall!
+                      .copyWith(fontSize: 20),
                 ),
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge!
-                    .copyWith(color: MyTheme.blackColor, fontSize: 20),
+                    .titleSmall!
+                    .copyWith(fontSize: 20),
                 onTap: () {
                   showDatePicker(
                     context: context,
@@ -129,7 +130,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                     color: MyTheme.blueColor,
                   ),
                   child: Text(
-                    'Save Changes',
+                    AppLocalizations.of(context)!.save_changes,
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!

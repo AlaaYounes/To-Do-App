@@ -1,0 +1,18 @@
+{
+  "app_title": "To Do List",
+  "task_title": "اسم المهام",
+  "task_description": "الوصف",
+  "task_date": "التاريخ",
+  "save_changes": "حفظ التغيرات",
+  "add_task": "إضافة مهام",
+  "language": "اللغة",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "theme_mode": "النمط",
+  "light": "مضئ",
+  "dark": "مظلم",
+  "settings": "الإعدادات",
+  "tasks": "المهام",
+  "edit_task": "تعديل مهام",
+  "delete_task": "حذف"
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/theme.dart';
 
@@ -28,7 +29,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 height: 10,
               ),
               Text(
-                'Title',
+                AppLocalizations.of(context)!.task_title,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: MyTheme.blackColor.withOpacity(.5), fontSize: 18),
               ),
@@ -58,7 +59,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 height: 15,
               ),
               Text(
-                'Description',
+                AppLocalizations.of(context)!.task_description,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: MyTheme.blackColor.withOpacity(.5), fontSize: 20),
               ),
@@ -89,7 +90,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 height: 15,
               ),
               Text(
-                'Task Date',
+                AppLocalizations.of(context)!.task_date,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: MyTheme.blackColor.withOpacity(.5), fontSize: 20),
               ),
@@ -145,7 +146,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                     color: MyTheme.blueColor,
                   ),
                   child: Text(
-                    'Add Task',
+                    AppLocalizations.of(context)!.add_task,
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!

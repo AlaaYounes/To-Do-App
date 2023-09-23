@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do/home/tasks/taskDetails.dart';
+import 'package:to_do/providers/config_provider.dart';
 import 'package:to_do/theme.dart';
 
 class TaskItem extends StatelessWidget {
@@ -8,6 +11,7 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Slidable(
       startActionPane: ActionPane(
         motion: const ScrollMotion(),
@@ -19,7 +23,7 @@ class TaskItem extends StatelessWidget {
             backgroundColor: MyTheme.redColor,
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Delete',
+            label: AppLocalizations.of(context)!.delete_task,
           ),
         ],
       ),
@@ -31,7 +35,7 @@ class TaskItem extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           height: 100,
           decoration: BoxDecoration(
-            color: MyTheme.whiteColor,
+            color: provider.isDark() ? MyTheme.navyBlue : MyTheme.whiteColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Row(

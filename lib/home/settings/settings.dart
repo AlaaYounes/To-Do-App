@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:to_do/home/tasks/languageBottomSheet.dart';
-import 'package:to_do/home/tasks/themeBottomSheet.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do/home/settings/languageBottomSheet.dart';
+import 'package:to_do/home/settings/themeBottomSheet.dart';
+import 'package:to_do/providers/config_provider.dart';
 import 'package:to_do/theme.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -13,6 +16,7 @@ class _SettingsTabState extends State<SettingsTab> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.height;
+    var provider = Provider.of<AppConfigProvider>(context);
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: width * .03, vertical: height * .04),
@@ -20,7 +24,7 @@ class _SettingsTabState extends State<SettingsTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Language',
+            AppLocalizations.of(context)!.language,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           SizedBox(
@@ -43,8 +47,14 @@ class _SettingsTabState extends State<SettingsTab> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'English',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      provider.isEnglish()
+                          ? AppLocalizations.of(context)!.english
+                          : AppLocalizations.of(context)!.arabic,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(
                           color: MyTheme.blueColor,
                           fontWeight: FontWeight.w400),
                     ),
@@ -61,8 +71,11 @@ class _SettingsTabState extends State<SettingsTab> {
             height: 40,
           ),
           Text(
-            'Theme mode',
-            style: Theme.of(context).textTheme.titleSmall,
+            AppLocalizations.of(context)!.theme_mode,
+            style: Theme
+                .of(context)
+                .textTheme
+                .titleSmall,
           ),
           SizedBox(
             height: 20,
@@ -84,7 +97,7 @@ class _SettingsTabState extends State<SettingsTab> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Light',
+                      '${provider.isDark() ? AppLocalizations.of(context)!.dark : AppLocalizations.of(context)!.light}',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           color: MyTheme.blueColor,
                           fontWeight: FontWeight.w400),

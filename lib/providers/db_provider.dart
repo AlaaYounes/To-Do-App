@@ -46,7 +46,7 @@ class DBProvider extends ChangeNotifier {
     return await taskCollection.doc(task.id).update({
       'title': task.title,
       'description': task.description,
-      'dateTime': task.dateTime,
+      'dateTime': task.dateTime?.millisecondsSinceEpoch,
     });
   }
 

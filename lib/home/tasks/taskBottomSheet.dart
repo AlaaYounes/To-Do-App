@@ -53,7 +53,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                   hintStyle: Theme.of(context)
                       .textTheme
                       .titleLarge!
-                      .copyWith(color: MyTheme.blackColor, fontSize: 20),
+                      .copyWith(color: MyTheme.greyColor, fontSize: 20),
                 ),
                 style: Theme.of(context)
                     .textTheme
@@ -83,7 +83,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                   hintStyle: Theme.of(context)
                       .textTheme
                       .titleLarge!
-                      .copyWith(color: MyTheme.blackColor, fontSize: 20),
+                      .copyWith(color: MyTheme.greyColor, fontSize: 20),
                 ),
                 style: Theme.of(context)
                     .textTheme
@@ -129,21 +129,22 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
               ),
               InkWell(
                 onTap: () {
-                  formKey.currentState!.validate();
-                  Task task = Task(
-                    title: titleController.text,
-                    description: descriptionController.text,
-                    dateTime: selectedDate,
-                  );
+                  if (formKey.currentState!.validate() != null) {
+                    Task task = Task(
+                      title: titleController.text,
+                      description: descriptionController.text,
+                      dateTime: selectedDate,
+                    );
 
-                  provider
-                      .addTaskToFireStore(task)
-                      .timeout(Duration(milliseconds: 500), onTimeout: () {
-                    Toast.show("task added successfully",
-                        duration: Toast.lengthLong, gravity: Toast.bottom);
-                  });
-                  provider.getTasksFromFireStore();
-                  Navigator.pop(context);
+                    provider
+                        .addTaskToFireStore(task)
+                        .timeout(Duration(milliseconds: 500), onTimeout: () {
+                      Navigator.pop(context);
+                      Toast.show("task added successfully",
+                          duration: Toast.lengthLong, gravity: Toast.bottom);
+                    });
+                    provider.getTasksFromFireStore();
+                  }
                 },
                 child: Container(
                   alignment: Alignment.center,

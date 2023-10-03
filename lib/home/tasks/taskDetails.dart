@@ -106,7 +106,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 onTap: () async {
                   var chosenDate = await showDatePicker(
                     context: context,
-                    initialDate: selectedDate!,
+                    initialDate: widget.task.dateTime!,
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(Duration(days: 365)),
                   );
@@ -131,6 +131,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 onTap: () {
                   widget.task.title = titleController.text;
                   widget.task.description = descriptionController.text;
+                  widget.task.dateTime = selectedDate;
                   dbProvider
                       .updateTasksFromFireStore(widget.task)
                       .timeout(Duration(milliseconds: 500), onTimeout: () {

@@ -14,5 +14,16 @@
   "settings": "Settings",
   "tasks": "Tasks",
   "edit_task": "Edit task",
-  "delete_task": "Delete"
+  "delete_task": "Delete",
+  "done": "Done!",
+  "have_account": "Do you have account ?",
+  "sign_up": "Register now",
+  "sign_up_btn": "Sign Up",
+  "log_in_btn": "Log in",
+  "log_in": "Log in now",
+  "already_have_account": "Already have account ?",
+  "name": "Name",
+  "email": "Email",
+  "password": "Password",
+  "confirm_password": "Confirm Password"
 }

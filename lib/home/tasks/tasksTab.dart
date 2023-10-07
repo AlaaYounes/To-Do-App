@@ -6,16 +6,18 @@ import 'package:to_do/providers/config_provider.dart';
 import 'package:to_do/providers/db_provider.dart';
 import 'package:to_do/theme.dart';
 
+import '../../providers/auth_provider.dart';
+
 class TasksTab extends StatelessWidget {
   const TasksTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    DateTime selectDate = DateTime.now();
     var provider = Provider.of<AppConfigProvider>(context);
     var dbProvider = Provider.of<DBProvider>(context);
+    var authProvider = Provider.of<AuthProvider>(context);
     if (dbProvider.taskList.isEmpty) {
-      dbProvider.getTasksFromFireStore();
+      dbProvider.getTasksFromFireStore(authProvider.currentUser!.id);
     }
     return Column(
       children: [
@@ -29,7 +31,7 @@ class TasksTab extends StatelessWidget {
             Duration(days: 365),
           ),
           onDateSelected: (date) {
-            dbProvider.changeDate(date);
+            dbProvider.changeDate(date, authProvider.currentUser!.id);
           },
           dayColor: provider.isDark() ? MyTheme.whiteColor : MyTheme.blackColor,
           monthColor:

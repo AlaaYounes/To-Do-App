@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do/Utils/firebase_utils.dart';
 import 'package:to_do/models/taskModel.dart';
+import 'package:to_do/providers/auth_provider.dart';
 import 'package:to_do/providers/db_provider.dart';
 import 'package:to_do/theme.dart';
 import 'package:toast/toast.dart';
@@ -25,6 +27,7 @@ class _TaskDetailsState extends State<TaskDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
     ToastContext().init(context);
     titleController.text = widget.task.title!;
     descriptionController.text = widget.task.description!;
@@ -132,10 +135,11 @@ class _TaskDetailsState extends State<TaskDetails> {
                   widget.task.title = titleController.text;
                   widget.task.description = descriptionController.text;
                   widget.task.dateTime = selectedDate;
-                  dbProvider
-                      .updateTasksFromFireStore(widget.task)
+                  FirebaseUtils.updateTasksFromFireStore(
+                          widget.task, authProvider.currentUser!.id)
                       .timeout(Duration(milliseconds: 500), onTimeout: () {
-                    dbProvider.getTasksFromFireStore();
+                    dbProvider
+                        .getTasksFromFireStore(authProvider.currentUser!.id);
                     Navigator.pop(context);
                     Toast.show("task updated successfully",
                         duration: Toast.lengthLong, gravity: Toast.bottom);

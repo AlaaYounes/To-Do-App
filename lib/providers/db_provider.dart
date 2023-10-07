@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do/Utils/firebase_utils.dart';
 
 import '../models/taskModel.dart';
 
@@ -7,21 +7,8 @@ class DBProvider extends ChangeNotifier {
   List<Task> taskList = [];
   DateTime selectDate = DateTime.now();
 
-  static CollectionReference<Task> getTaskCollection() {
-    return FirebaseFirestore.instance.collection('tasks').withConverter(
-        fromFirestore: (snapshot, options) => Task.fromJson(snapshot.data()!),
-        toFirestore: (task, options) => task.toJson());
-  }
-
-  Future<void> addTaskToFireStore(Task task) async {
-    var taskCollection = getTaskCollection();
-    var document = taskCollection.doc();
-    task.id = document.id;
-    return await document.set(task);
-  }
-
-  getTasksFromFireStore() async {
-    var taskCollection = getTaskCollection();
+  getTasksFromFireStore(String? uId) async {
+    var taskCollection = FirebaseUtils.getTaskCollection(uId!);
     var querySnapshot = await taskCollection.get();
     taskList = querySnapshot.docs.map((doc) => doc.data()).toList();
 
@@ -37,33 +24,11 @@ class DBProvider extends ChangeNotifier {
       }
       return false;
     }).toList();
-
     notifyListeners();
   }
 
-  Future<void> updateTasksFromFireStore(Task task) async {
-    var taskCollection = getTaskCollection();
-    return await taskCollection.doc(task.id).update({
-      'title': task.title,
-      'description': task.description,
-      'dateTime': task.dateTime?.millisecondsSinceEpoch,
-    });
-  }
-
-  Future<void> isDone(Task task) async {
-    var taskCollection = getTaskCollection();
-    await taskCollection.doc(task.id).update({'isDone': task.isDone});
-    notifyListeners();
-  }
-
-  Future<void> deleteTaskFromFireStore(Task task) async {
-    var taskCollection = getTaskCollection();
-    await taskCollection.doc(task.id).delete();
-    notifyListeners();
-  }
-
-  changeDate(DateTime newDate) {
+  changeDate(DateTime newDate, String? uId) {
     selectDate = newDate;
-    getTasksFromFireStore();
+    getTasksFromFireStore(uId);
   }
 }

@@ -14,5 +14,16 @@
   "settings": "الإعدادات",
   "tasks": "المهام",
   "edit_task": "تعديل مهام",
-  "delete_task": "حذف"
+  "delete_task": "حذف",
+  "done": "تمت!",
+  "have_account": "هل لديك حساب ؟",
+  "sign_up": "سجل الآن",
+  "sign_up_btn": "انشاء حساب",
+  "log_in_btn": "تسجيل الدخول",
+  "log_in": "سجل دخول الآن",
+  "already_have_account": "لديك حساب بالفعل ؟",
+  "name": "الاسم",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة السر",
+  "confirm_password": "تأكيد كلمة السر"
 }

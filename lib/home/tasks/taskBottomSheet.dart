@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do/Utils/firebase_utils.dart';
 import 'package:to_do/models/taskModel.dart';
+import 'package:to_do/providers/auth_provider.dart';
 import 'package:to_do/providers/db_provider.dart';
 import 'package:to_do/theme.dart';
 import 'package:toast/toast.dart';
-
 class TaskBottomSheet extends StatefulWidget {
   @override
   State<TaskBottomSheet> createState() => _TaskBottomSheetState();
 }
-
 class _TaskBottomSheetState extends State<TaskBottomSheet> {
   DateTime selectedDate = DateTime.now();
   var formKey = GlobalKey<FormState>();
@@ -20,6 +20,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
     ToastContext().init(context);
     var provider = Provider.of<DBProvider>(context);
     return SingleChildScrollView(
@@ -106,7 +107,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 onTap: () async {
                   var chosenDate = await showDatePicker(
                     context: context,
-                    initialDate: selectedDate!,
+                    initialDate: selectedDate,
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(Duration(days: 365)),
                   );
@@ -116,7 +117,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                   setState(() {});
                 },
                 child: Text(
-                  '${DateFormat('dd-MM-yyyy ').format(selectedDate!)}',
+                  '${DateFormat('dd-MM-yyyy ').format(selectedDate)}',
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
@@ -136,14 +137,15 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                       dateTime: selectedDate,
                     );
 
-                    provider
-                        .addTaskToFireStore(task)
+                    FirebaseUtils.addTaskToFireStore(
+                            task, authProvider.currentUser!.id)
                         .timeout(Duration(milliseconds: 500), onTimeout: () {
                       Navigator.pop(context);
                       Toast.show("task added successfully",
                           duration: Toast.lengthLong, gravity: Toast.bottom);
                     });
-                    provider.getTasksFromFireStore();
+                    provider
+                        .getTasksFromFireStore(authProvider.currentUser!.id);
                   }
                 },
                 child: Container(

@@ -128,6 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
         print('login successfully');
         DialogUtils.hideLoading(context);
         DialogUtils.showMessage(context, 'Login successfully.', () {
+          Navigator.pop(context);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeScreen()));
         });
